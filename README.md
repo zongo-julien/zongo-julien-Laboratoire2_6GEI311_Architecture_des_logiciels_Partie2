@@ -6,7 +6,7 @@ Cours **6GEI311 Architecture des logiciels**
 
 Ce dépôt contient la **Partie 2** du laboratoire : un système de suivi de tickets en Python qui met en œuvre quatre patrons de conception, **State**, **Template Method**, **Factory Method** et **Command**.
 
-La **Partie 1** (implémentation littérale du diagramme de classes initial) est dans un dépôt séparé : [Laboratoire2_6GEI311_Architecture_des_logiciels_Partie1]((https://github.com/zongo-julien/zongo-julien-Laboratoire2_6GEI311_Architecture_des_logiciels_Partie1)). Ce README présente les résultats des deux parties.
+La **Partie 1** (implémentation littérale du diagramme de classes initial) est dans un dépôt séparé : [Laboratoire2_6GEI311_Architecture_des_logiciels_Partie1](https://github.com/zongo-julien/zongo-julien-Laboratoire2_6GEI311_Architecture_des_logiciels_Partie1). Ce README présente les résultats des deux parties.
 
 ## Sommaire
 
