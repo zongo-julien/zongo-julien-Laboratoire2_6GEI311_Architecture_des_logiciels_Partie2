@@ -1,0 +1,105 @@
+from __future__ import annotations
+
+from datetime import date
+from typing import TYPE_CHECKING
+
+from description.description import Description
+from etats.etat_ouvert import EtatOuvert
+from modele.commentaire import Commentaire
+from modele.exceptions import AccesRefuseException
+
+if TYPE_CHECKING:
+    from acteurs.user import User
+    from acteurs.utilisateur_systeme import UtilisateurSysteme
+    from etats.etat_ticket import EtatTicket
+    from modele.enums import Priorite, Statut
+
+
+class Ticket:
+    """Ticket de support : contexte de la machine à états (patron State)."""
+
+    def __init__(self, ticketID: int, title: str, priority: Priorite) -> None:
+        self._ticketID: int = ticketID
+        self._title: str = title
+        self._priority: Priorite = priority
+        self._creationDate: date = date.today()
+        self._updateDate: date = date.today()
+        self._etat: EtatTicket = EtatOuvert()
+        self._creator: User | None = None
+        self._assignedUser: User | None = None
+        self._aEteAssigne: bool = False
+        self._comments: list[Commentaire] = []
+        self._description: Description = Description()
+
+    @property
+    def ticketID(self) -> int:
+        return self._ticketID
+
+    @property
+    def title(self) -> str:
+        return self._title
+
+    @property
+    def priority(self) -> Priorite:
+        return self._priority
+
+    @property
+    def creationDate(self) -> date:
+        return self._creationDate
+
+    @property
+    def updateDate(self) -> date:
+        return self._updateDate
+
+    @property
+    def status(self) -> Statut:
+        """Attribut dérivé : le statut n'est pas stocké, il provient de l'état courant."""
+        return self._etat.nom
+
+    @property
+    def creator(self) -> User | None:
+        return self._creator
+
+    @property
+    def assignedUser(self) -> User | None:
+        return self._assignedUser
+
+    @property
+    def aDejaEteAssigne(self) -> bool:
+        return self._aEteAssigne
+
+    @property
+    def comments(self) -> list[Commentaire]:
+        return list(self._comments)
+
+    @property
+    def description(self) -> Description:
+        return self._description
+
+    def updateStatus(self, nouveau_statut: Statut) -> None:
+        """Délègue entièrement la décision à l'état courant."""
+        self._etat.gererTransition(self, nouveau_statut)
+
+    def setEtat(self, nouvel_etat: EtatTicket) -> None:
+        """Réservée aux classes d'état."""
+        self._etat = nouvel_etat
+        self._updateDate = date.today()
+
+    def definirCreateur(self, user: User) -> None:
+        if self._creator is not None:
+            raise AccesRefuseException(
+                f"Le ticket {self._ticketID} a déjà un créateur : {self._creator.name}"
+            )
+        self._creator = user
+
+    def assignTo(self, user: User) -> None:
+        self._assignedUser = user
+        self._aEteAssigne = True
+
+    def retirerAssignation(self) -> None:
+        # _aEteAssigne n'est jamais remis à False : l'historique d'assignation est conservé.
+        self._assignedUser = None
+
+    def addComment(self, texte: str, auteur: UtilisateurSysteme) -> None:
+        """Autorisé dans tous les états."""
+        self._comments.append(Commentaire(texte, auteur, date.today()))
