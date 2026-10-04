@@ -135,7 +135,7 @@ L'Admin ne crée, ne supprime ni n'édite aucun ticket. Chacune de ses opératio
 
 ### Partie 1 : diagramme initial
 
-La Partie 1 traduit littéralement le diagramme de classes fourni : trois classes, `User`, `Admin` et `Ticket`. Le statut y est une simple chaîne de caractères, sans aucune règle de transition, et l'assigné et les commentaires ne sont pas mémorisés, faute d'attribut prévu dans le diagramme. Le code se trouve dans le [dépôt de la Partie 1](https://github.com/zongo-julien/Laboratoire2_6GEI311_Architecture_des_logiciels_Partie1).
+La Partie 1 traduit littéralement le diagramme de classes fourni : trois classes, `User`, `Admin` et `Ticket`. Le statut y est une simple chaîne de caractères, sans aucune règle de transition, et l'assigné et les commentaires ne sont pas mémorisés, faute d'attribut prévu dans le diagramme. Le code se trouve dans le [dépôt de la Partie 1](https://github.com/zongo-julien/zongo-julien-Laboratoire2_6GEI311_Architecture_des_logiciels_Partie1).
 
 ![Diagramme de classes de la Partie 1](documents/uml_partie1.png)
 
@@ -143,7 +143,7 @@ La Partie 1 traduit littéralement le diagramme de classes fourni : trois classe
 
 Le diagramme de la Partie 2 corrige les défauts de la Partie 1 et ajoute les sessions d'édition, les lots administrateur et les descriptions multimédias. Cliquer sur l'image pour l'agrandir. Le fichier source draw.io est disponible dans [`documents/Lab2_6GEI311_diagramme_classes_partie2.drawio`](documents/Lab2_6GEI311_diagramme_classes_partie2.drawio).
 
-![Diagramme de classes de la Partie 2](documents/uuml_partie2 (2).png)
+![Diagramme de classes de la Partie 2](documents/uml_partie2 (2).png)
 
 ### Fonctionnalités implémentées
 
